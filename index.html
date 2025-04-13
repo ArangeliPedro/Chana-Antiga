@@ -240,12 +240,44 @@
         }
 
         /* Estilo para o mapa da China */
-        .map-container {
+        .map1-container {
             position: relative;
             width: 100%;
             height: 400px;
             margin: 20px 0;
             overflow: hidden;
+            background-image: url(imagens/maparios.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .map2-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            overflow: hidden;
+            background-image: url(imagens/muralha.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .map3-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            overflow: hidden;
+            background-image: url(imagens/rota.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .nones{
+            display: none;
         }
 
         .china-map {
@@ -547,24 +579,8 @@
             </div>
         </div>
 
-        <div class="map-container">
-            <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
-                <!-- Mapa simplificado da China -->
-                <path class="china-map" d="M200,200 C250,150 300,100 400,150 C500,200 600,250 650,300 C700,350 600,400 500,400 C400,400 300,350 250,300 C200,250 150,250 200,200 Z" />
-                
-                <!-- Rio Amarelo -->
-                <path d="M250,200 C300,220 350,210 400,230 C450,250 500,270 550,250" 
-                      fill="none" stroke="#D4BA6A" stroke-width="3" />
-                
-                <!-- Rio Yangtze -->
-                <path d="M300,300 C350,280 400,290 450,280 C500,270 550,260 600,280" 
-                      fill="none" stroke="#6AAAD4" stroke-width="3" />
-                
-                <!-- Anotações -->
-                <text x="450" y="200" fill="#a71d1d" font-size="14">Rio Amarelo</text>
-                <text x="500" y="320" fill="#a71d1d" font-size="14">Rio Yangtze</text>
-                <text x="400" y="250" fill="#a71d1d" font-size="18">中国</text>
-            </svg>
+        <div class="map1-container">
+            
         </div>
         
         <div class="scroll-container">
@@ -867,7 +883,8 @@
             </div>
         </div>
 
-        <div class="map-container">
+        <div class="map2-container">
+            <div class="nones">
             <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
                 <!-- Contorno da China -->
                 <path class="china-map" d="M200,200 C250,150 300,100 400,150 C500,200 600,250 650,300 C700,350 600,400 500,400 C400,400 300,350 250,300 C200,250 150,250 200,200 Z" />
@@ -875,6 +892,7 @@
                 <!-- Grande Muralha -->
                 <path class="great-wall" d="M150,150 C200,140 250,150 300,140 C350,130 400,120 450,130 C500,140 550,150 600,140" />
             </svg>
+            </div>
         </div>
         
         <div class="scroll-container">
@@ -960,7 +978,8 @@
             </div>
         </div>
 
-        <div class="map-container">
+        <div class="map3-container">
+            <div class="nones">
             <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
                 <!-- Contorno da China -->
                 <path class="china-map" d="M500,200 C550,150 600,150 650,200 C700,250 700,300 650,350 C600,400 550,400 500,350 C450,300 450,250 500,200 Z" />
@@ -984,6 +1003,7 @@
                 <circle cx="100" cy="260" r="5" fill="var(--primary-color)" />
                 <text x="105" y="260" fill="var(--primary-color)" font-size="12">Antioquia</text>
             </svg>
+            </div>
         </div>
         
         <div class="scroll-container">
