@@ -3,20 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>China Antiga - História e Legado</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <title>Reinos em Ascensão - Combate Aprimorado</title>
     <style>
-        /* Variáveis e estilos gerais */
-        :root {
-            --primary-color: #a71d1d;
-            --secondary-color: #f9d9a7;
-            --text-color: #333;
-            --scroll-color: #d4a76a;
-            --scroll-bg: #f4e4c9;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -24,1228 +14,1374 @@
         }
 
         body {
-            font-family: 'Times New Roman', serif;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0iI2E3MWQxZCIgZmlsbC1vcGFjaXR5PSIwLjA1IiBkPSJNNTAgMjVMNjAgNDAgNzUgNTAgNjAgNjAgNTAgNzUgNDAgNjAgMjUgNTAgNDAgNDB6Ii8+PC9zdmc+');
-        }
-
-        h1, h2, h3 {
-            font-family: 'Arial', sans-serif;
-            color: var(--primary-color);
-        }
-
-        section {
-            min-height: 100vh;
-            padding: 5vh 5vw;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Cinzel', serif;
+            color: #e0e0e0;
+            overflow: hidden;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-        }
-
-        .scroll-indicator {
-            position: fixed;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            z-index: 1000;
-        }
-
-        .scroll-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--scroll-color);
-            margin: 8px 0;
-            cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
-        }
-
-        .scroll-dot.active {
-            transform: scale(1.5);
-            background-color: var(--primary-color);
-        }
-
-        /* Estilos específicos para a intro */
-        .intro {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/api/placeholder/1600/900") center/cover no-repeat;
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
-        .intro h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s, transform 1s;
-        }
-
-        .intro h2 {
-            font-size: 2rem;
-            margin-bottom: 50px;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s, transform 1s;
-            transition-delay: 0.3s;
-        }
-
-        .intro.active h1, .intro.active h2 {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .scroll-down {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            40% {
-                transform: translateY(-20px) translateX(-50%);
-            }
-            60% {
-                transform: translateY(-10px) translateX(-50%);
-            }
-        }
-
-        /* Estilos para pergaminhos */
-        .scroll-container {
-            background-color: var(--scroll-bg);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            margin: 20px 0;
+        #game-container {
+            width: 900px;
+            height: 700px;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+                linear-gradient(180deg, #2c1810 0%, #1a0f0a 100%);
+            border: 4px solid #8b4513;
+            border-radius: 8px;
+            box-shadow: 
+                0 0 30px rgba(139, 69, 19, 0.5),
+                inset 0 0 50px rgba(0, 0, 0, 0.8);
             position: relative;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            transform: scale(0.9);
-            opacity: 0;
-            transition: transform 0.6s, opacity 0.6s;
-        }
-
-        .scroll-container:before, .scroll-container:after {
-            content: '';
-            position: absolute;
-            height: 30px;
-            background-color: var(--scroll-color);
-            border-radius: 15px;
-            width: calc(100% - 60px);
-            left: 30px;
-        }
-
-        .scroll-container:before {
-            top: -15px;
-        }
-
-        .scroll-container:after {
-            bottom: -15px;
-        }
-
-        .scroll-container.animated {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .scroll-content {
-            max-height: 0;
             overflow: hidden;
-            transition: max-height 0.6s ease-in-out;
         }
 
-        .scroll-container.open .scroll-content {
-            max-height: 1000px;
-        }
-
-        .scroll-title {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .scroll-title:hover {
-            color: var(--primary-color);
-        }
-
-        .scroll-title i {
-            transition: transform 0.3s;
-        }
-
-        .scroll-container.open .scroll-title i {
-            transform: rotate(180deg);
-        }
-
-        /* Estilos específicos para cada seção */
-        #geografia {
-            background-color: #F8F0E3;
-        }
-
-        #dinastias {
-            background-color: #F5E8D5;
-        }
-
-        #cultura {
-            background-color: #F9F2E3;
-        }
-
-        #escrita {
-            background-color: #F4EFE9;
-        }
-
-        #religiao {
-            background-color: #F8F4ED;
-        }
-
-        #ciencia {
-            background-color: #F3EDE0;
-        }
-
-        #muralha {
-            background-color: #F9F5EA;
-        }
-
-        #exercito {
-            background-color: #F6EFDF;
-        }
-
-        #comercio {
-            background-color: #F7F1E5;
-        }
-
-        #legado {
-            background-color: #F5EDE2;
-        }
-
-        /* Estilo para o mapa da China */
-        .map1-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            margin: 20px 0;
-            overflow: hidden;
-            background-image: url(imagens/maparios.png);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        .map2-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            margin: 20px 0;
-            overflow: hidden;
-            background-image: url(imagens/muralha.png);
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        .map3-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            margin: 20px 0;
-            overflow: hidden;
-            background-image: url(imagens/rota.png);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        .nones{
-            display: none;
-        }
-
-        .china-map {
-            fill: var(--scroll-color);
-            stroke: var(--primary-color);
-            stroke-width: 2;
-            transition: fill 0.3s;
-        }
-
-        .china-map:hover {
-            fill: var(--primary-color);
-        }
-
-        /* Animação da Grande Muralha */
-        .great-wall {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            stroke: var(--primary-color);
-            stroke-width: 3;
-            fill: none;
-        }
-
-        .great-wall.animated {
-            animation: drawWall 3s forwards;
-        }
-
-        @keyframes drawWall {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        /* Animação da Rota da Seda */
-        .silk-road {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            stroke: var(--primary-color);
-            stroke-width: 3;
-            fill: none;
-        }
-
-        .silk-road.animated {
-            animation: drawRoad 3s forwards;
-        }
-
-        @keyframes drawRoad {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        /* Estilos para o Exército de Terracota */
-        .terracotta-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .terracotta-soldier {
-            width: 60px;
-            height: 150px;
-            background-color: #8B5A2B;
-            position: relative;
-            margin: 10px;
-            transform: translateY(200px);
-            opacity: 0;
-            transition: transform 0.5s, opacity 0.5s;
-        }
-
-        .terracotta-soldier.animated {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .terracotta-soldier:before {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background-color: #8B5A2B;
-            border-radius: 50%;
-            top: -25px;
-            left: 10px;
-        }
-
-        /* Timeline para as dinastias */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
-
-        .timeline:before {
+        #game-container::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 50%;
-            width: 4px;
-            height: 0;
-            background: var(--primary-color);
-            transform: translateX(-50%);
-            transition: height 1s;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 69, 19, 0.1) 2px,
+                    rgba(139, 69, 19, 0.1) 4px
+                );
+            pointer-events: none;
         }
 
-        .timeline.animated:before {
-            height: 100%;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.6s, transform 0.6s;
-        }
-
-        .timeline-item.animated {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .timeline-item:nth-child(even) {
-            transform: translateX(50px);
-        }
-
-        .timeline-item:nth-child(even).animated {
-            transform: translateX(0);
-        }
-
-        .timeline-content {
-            position: relative;
-            width: 45%;
-            padding: 15px;
-            background: var(--scroll-bg);
+        #ui-top {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #8b4513;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-left: auto;
-        }
-
-        /* Animação para caracteres chineses */
-        .chinese-characters {
             display: flex;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 10;
+        }
+
+        .health-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .health-bar-container {
+            width: 200px;
+            height: 20px;
+            background: #333;
+            border: 2px solid #666;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #32cd32 0%, #228b22 100%);
+            transition: width 0.3s ease-out, background 0.3s ease-out;
+            border-radius: 8px;
+        }
+
+        .health-bar-fill.warning {
+            background: linear-gradient(90deg, #ffa500 0%, #ff8c00 100%);
+        }
+
+        .health-bar-fill.critical {
+            background: linear-gradient(90deg, #ff4500 0%, #dc143c 100%);
+        }
+
+        .hp-text {
+            font-size: 12px;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .abilities-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .ability-icon {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #666;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            margin: 20px 0;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .ability-icon.ready {
+            background: linear-gradient(135deg, #4169e1 0%, #1e90ff 100%);
+            border-color: #00bfff;
+            color: white;
+        }
+
+        .ability-icon.cooldown {
+            background: #333;
+            border-color: #666;
+            color: #999;
         }
 
         .character {
-            font-size: 2rem;
-            margin: 10px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s, transform 0.5s;
+            position: absolute;
+            border: 3px solid;
+            border-radius: 5px;
+            transition: all 0.1s ease-out;
         }
 
-        .character.animated {
-            opacity: 1;
-            transform: translateY(0);
+        #player {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4169e1 0%, #1e90ff 100%);
+            border-color: #00bfff;
+            box-shadow: 0 0 15px rgba(65, 105, 225, 0.6);
         }
 
-        /* Estilo para invenções chinesas */
-        .inventions-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 20px 0;
+        #player.shielded {
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+            border-color: #00ffff;
         }
 
-        .invention {
-            width: 200px;
-            margin: 15px;
-            text-align: center;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.6s, transform 0.6s;
+        #enemy {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+            border-color: #ff6347;
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
         }
 
-        .invention.animated {
-            opacity: 1;
-            transform: scale(1);
+        #enemy.charging {
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.9);
+            border-color: #ff00ff;
         }
 
-        .invention-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        /* Estilo para legado */
-        .legacy-items {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-
-        .legacy-item {
-            width: 180px;
-            height: 180px;
-            background-color: rgba(167, 29, 29, 0.1);
+        .projectile {
+            position: absolute;
             border-radius: 50%;
+        }
+
+        .player-projectile {
+            width: 8px;
+            height: 12px;
+            background: linear-gradient(180deg, #00ffff 0%, #0080ff 100%);
+            border: 1px solid #00bfff;
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+            border-radius: 4px;
+        }
+
+        .player-charged-shot {
+            width: 16px;
+            height: 20px;
+            background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%);
+            border: 2px solid #ffff00;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
+            border-radius: 6px;
+        }
+
+        .enemy-bullet {
+            width: 6px;
+            height: 6px;
+            background: #696969;
+            border: 1px solid #2f2f2f;
+            box-shadow: 0 0 5px rgba(105, 105, 105, 0.6);
+        }
+
+        .enemy-knife {
+            width: 8px;
+            height: 16px;
+            background: linear-gradient(180deg, #a0522d 0%, #8b4513 100%);
+            border: 1px solid #654321;
+            border-radius: 2px;
+            box-shadow: 0 0 6px rgba(160, 82, 45, 0.6);
+        }
+
+        .enemy-spell {
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle, #9932cc 0%, #4b0082 100%);
+            border: 2px solid #dda0dd;
+            box-shadow: 0 0 12px rgba(153, 50, 204, 0.9);
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        .enemy-laser {
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(180deg, #ff0000 0%, #ff6347 100%);
+            border: 1px solid #ff4500;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+            border-radius: 2px;
+        }
+
+        .enemy-homing {
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #ff1493 0%, #8b008b 100%);
+            border: 2px solid #ff69b4;
+            box-shadow: 0 0 8px rgba(255, 20, 147, 0.8);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .shield-effect {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: shield-pulse 1s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shield-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        #game-messages {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #8b4513;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 15px;
-            padding: 20px;
+            z-index: 1000;
+        }
+
+        .overlay h2 {
+            font-size: 36px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ffd700; }
+            to { text-shadow: 0 0 30px #ffd700, 0 0 40px #ffd700; }
+        }
+
+        #countdown-timer {
+            font-size: 48px;
+            color: #ff4500;
+            margin: 20px 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .overlay p {
+            font-size: 18px;
+            color: #e0e0e0;
+            margin-bottom: 30px;
             text-align: center;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.6s, transform 0.6s;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
-        .legacy-item.animated {
-            opacity: 1;
-            transform: scale(1);
+        #restart-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            color: #ffd700;
+            border: 3px solid #daa520;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
-        .legacy-icon {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+        #restart-btn:hover {
+            background: linear-gradient(135deg, #a0522d 0%, #cd853f 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
         }
 
-        /* Responsivo */
-        @media (max-width: 768px) {
-            .intro h1 {
-                font-size: 2.5rem;
-            }
+        #controls-info {
+            position: absolute;
+            top: 130px;
+            left: 20px;
+            right: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #ccc;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            line-height: 1.4;
+        }
 
-            .intro h2 {
-                font-size: 1.5rem;
-            }
+        .boss-phase-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #ff4500;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: phase-announce 3s ease-out;
+            z-index: 100;
+            pointer-events: none;
+        }
 
-            .scroll-indicator {
-                display: none;
-            }
-
-            .timeline-content {
-                width: 85%;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .timeline:before {
-                left: 20px;
-            }
+        @keyframes phase-announce {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
         }
     </style>
 </head>
 <body>
-    <div class="scroll-indicator">
-        <div class="scroll-dot active" data-section="intro"></div>
-        <div class="scroll-dot" data-section="geografia"></div>
-        <div class="scroll-dot" data-section="dinastias"></div>
-        <div class="scroll-dot" data-section="cultura"></div>
-        <div class="scroll-dot" data-section="escrita"></div>
-        <div class="scroll-dot" data-section="religiao"></div>
-        <div class="scroll-dot" data-section="ciencia"></div>
-        <div class="scroll-dot" data-section="muralha"></div>
-        <div class="scroll-dot" data-section="exercito"></div>
-        <div class="scroll-dot" data-section="comercio"></div>
-        <div class="scroll-dot" data-section="legado"></div>
+    <div id="game-container">
+        <div id="ui-top">
+            <div id="player-health-display" class="health-display">
+                <span class="name">Cavaleiro Errante</span>
+                <div class="health-bar-container">
+                    <div class="health-bar-fill" id="player-health-fill"></div>
+                </div>
+                <span class="hp-text" id="player-hp-text">HP: 100/100</span>
+                <div class="abilities-bar">
+                    <div class="ability-icon ready" id="dash-icon" title="Dash (Shift)">Shift</div>
+                    <div class="ability-icon ready" id="shield-icon" title="Escudo (S)">S</div>
+                    <div class="ability-icon ready" id="charge-icon" title="Tiro Carregado (Q)">?</div>
+                </div>
+            </div>
+            <div id="enemy-health-display" class="health-display">
+                <span class="name">O Véu - Fase <span id="boss-phase">1</span></span>
+                <div class="health-bar-container">
+                    <div class="health-bar-fill" id="enemy-health-fill"></div>
+                </div>
+                <span class="hp-text" id="enemy-hp-text">HP: 300/300</span>
+                <div style="font-size: 10px; color: #ccc; margin-top: 5px;">
+                    <span id="boss-pattern">Padrão: Básico</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="controls-info">
+            Movimento: ← → (A/D) | Atirar: Espaço | Dash: Shift | Escudo: S | Tiro Carregado: ? (segure)
+            <br>O Véu tem 3 fases - cada uma mais mortal que a anterior!
+        </div>
+
+        <div id="player" class="character"></div>
+        <div id="enemy" class="character"></div>
+
+        <div id="game-messages">
+            <div>Prepare-se para enfrentar O Véu!</div>
+            <div style="font-size: 12px; color: #ccc;">Use suas habilidades sabiamente</div>
+        </div>
+
+        <div id="finishing-blow-screen" class="overlay" style="display: none;">
+            <h2>GOLPE FINAL!</h2>
+            <div id="countdown-timer">Tempo: 15s</div>
+            <p>Pressione a tecla 'F' rapidamente para desferir o golpe fatal!</p>
+            <p style="font-size: 14px; color: #ff4500;">Pressões necessárias: <span id="hits-needed">10</span></p>
+        </div>
+
+        <div id="game-over-screen" class="overlay" style="display: none;">
+            <h2 id="final-message"></h2>
+            <p id="final-stats"></p>
+            <button id="restart-btn">Reiniciar Jogo</button>
+        </div>
     </div>
 
-    <section id="intro" class="intro">
-        <h1>A China Antiga</h1>
-        <h2>Uma Viagem pela História da Civilização Chinesa</h2>
-        <div class="scroll-down">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
-
-    <section id="geografia">
-        <h2>1. Geografia e Origem</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>O Berço da Civilização Chinesa</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A civilização chinesa teve origem nas planícies ao longo do Rio Amarelo (Huang He) por volta de 7000 a.C. A geografia da China é caracterizada por montanhas a oeste, desertos ao norte, e oceanos a leste, o que contribuiu para seu relativo isolamento e desenvolvimento cultural único.</p>
-                <p>O território chinês pode ser dividido em três zonas principais:</p>
-                <ul>
-                    <li>As regiões montanhosas do oeste, incluindo o planalto do Tibete</li>
-                    <li>As planícies férteis dos rios Amarelo e Yangtzé</li>
-                    <li>As regiões costeiras do leste</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="map1-container">
-            
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Importância dos Rios</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>Os rios foram fundamentais para o desenvolvimento da civilização chinesa:</p>
-                <ul>
-                    <li><strong>Rio Amarelo (Huang He)</strong>: Considerado o "berço da civilização chinesa", suas inundações depositavam sedimentos férteis para a agricultura.</li>
-                    <li><strong>Rio Yangtze (Chang Jiang)</strong>: O rio mais longo da Ásia, favoreceu o cultivo de arroz e o desenvolvimento de cidades ao longo de suas margens.</li>
-                </ul>
-                <p>Esses rios não apenas forneceram água para irrigação, mas também serviram como importantes rotas de comércio e transporte, facilitando a unificação cultural e política ao longo dos séculos.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="dinastias">
-        <h2>2. Dinastias Principais</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>A Sucessão do Poder Imperial</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A história da China antiga é tradicionalmente contada através de suas dinastias, que são períodos de governo sob uma família específica. Cada dinastia deixou sua marca na cultura, política e sociedade chinesa.</p>
-            </div>
-        </div>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Dinastia Xia (c. 2070-1600 a.C.)</h3>
-                    <p>Considerada a primeira dinastia chinesa, embora existam poucos registros arqueológicos confirmados.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Dinastia Shang (c. 1600-1046 a.C.)</h3>
-                    <p>Primeira dinastia com evidências arqueológicas sólidas. Desenvolveu a escrita em ossos oraculares, bronze sofisticado e grandes centros urbanos.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Dinastia Zhou (1046-256 a.C.)</h3>
-                    <p>A mais longa dinastia na história da China. Dividida em Zhou Ocidental e Zhou Oriental. Durante este período surgiram o Confucionismo, Taoísmo e outras escolas filosóficas.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Dinastia Qin (221-206 a.C.)</h3>
-                    <p>Curta, mas altamente significativa. O imperador Qin Shi Huang unificou a China, padronizou a escrita, moeda e pesos/medidas. Iniciou a construção da Grande Muralha.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Dinastia Han (206 a.C.-220 d.C.)</h3>
-                    <p>Era de ouro da antiguidade chinesa. Expansão territorial, desenvolvimento do comércio pela Rota da Seda, avanços tecnológicos e fortalecimento do Confucionismo.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cultura">
-        <h2>3. Cultura e Sociedade</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Estrutura Social Chinesa</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A sociedade chinesa antiga era hierárquica, com uma estrutura social claramente definida:</p>
-                <ol>
-                    <li><strong>Imperador e Família Imperial</strong>: No topo da hierarquia, considerados intermediários entre o céu e a terra.</li>
-                    <li><strong>Nobreza e Funcionários</strong>: Aristocratas e burocratas que administravam o império.</li>
-                    <li><strong>Camponeses</strong>: A grande maioria da população, responsáveis pela agricultura.</li>
-                    <li><strong>Artesãos</strong>: Produziam cerâmica, seda, bronze e outros artigos.</li>
-                    <li><strong>Mercadores</strong>: Embora economicamente prósperos, tinham baixo status social.</li>
-                </ol>
-                <p>A família era a unidade básica da sociedade, com forte ênfase na piedade filial e respeito aos ancestrais.</p>
-            </div>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Artes e Entretenimento</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>As artes floresceram na China antiga, refletindo os valores e a estética da sociedade:</p>
-                <ul>
-                    <li><strong>Pintura e Caligrafia</strong>: Consideradas formas de arte supremas, frequentemente combinando imagens com poesia.</li>
-                    <li><strong>Cerâmica</strong>: Desde os vasos neolíticos até a famosa porcelana das dinastias posteriores.</li>
-                    <li><strong>Música</strong>: Utilizava instrumentos como cítaras, flautas e tambores em cerimônias e entretenimento.</li>
-                    <li><strong>Ópera</strong>: Desenvolveu-se como uma combinação de música, dança, acrobacia e narrativa dramática.</li>
-                    <li><strong>Poesia</strong>: Forma de expressão altamente valorizada entre os letrados.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="escrita">
-        <h2>4. Escrita e Literatura</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Evolução da Escrita Chinesa</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A escrita chinesa é uma das mais antigas do mundo ainda em uso. Seu desenvolvimento pode ser traçado através de vários estágios:</p>
-                <ul>
-                    <li><strong>Jiaguwen</strong> (escrita em ossos oraculares): Os primeiros exemplos conhecidos, da Dinastia Shang, usados para adivinhação.</li>
-                    <li><strong>Jinwen</strong> (escrita em bronze): Inscrições em vasos e objetos rituais de bronze.</li>
-                    <li><strong>Lishu</strong> (escrita de oficiais): Desenvolvida durante a Dinastia Qin para padronizar a escrita em todo o império.</li>
-                    <li><strong>Kaishu</strong> (escrita regular): Estabelecida durante a Dinastia Han, forma a base dos caracteres modernos.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="chinese-characters">
-            <div class="character">人</div>
-            <div class="character">山</div>
-            <div class="character">水</div>
-            <div class="character">木</div>
-            <div class="character">火</div>
-            <div class="character">土</div>
-            <div class="character">金</div>
-            <div class="character">日</div>
-            <div class="character">月</div>
-            <div class="character">天</div>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Literatura Clássica</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A literatura chinesa antiga produziu obras que continuam a influenciar o pensamento e a cultura chinesa até hoje:</p>
-                <ul>
-                    <li><strong>Os Cinco Clássicos</strong>: Textos fundamentais compilados ou editados por Confúcio, incluindo o I Ching (Livro das Mudanças) e o Shijing (Livro das Canções).</li>
-                    <li><strong>Os Quatro Livros</strong>: Textos do cânone confucionista, incluindo os Analectos de Confúcio e o Mêncio.</li>
-                    <li><strong>Tao Te Ching</strong>: Texto fundamental do Taoísmo, atribuído a Lao Tsé.</li>
-                    <li><strong>Poesia Tang</strong>: Considerada o ápice da poesia chinesa, com poetas como Li Bai e Du Fu.</li>
-                    <li><strong>História e Crônicas</strong>: Registros históricos detalhados, começando com os Registros do Historiador de Sima Qian.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="religiao">
-        <h2>5. Religião e Filosofias</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>As Três Doutrinas</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>O pensamento chinês é tradicionalmente moldado por três grandes sistemas filosófico-religiosos que coexistiram e se influenciaram mutuamente:</p>
-                
-                <h4>Confucionismo</h4>
-                <p>Fundado por Confúcio (551-479 a.C.), é mais uma filosofia ética e social do que uma religião. Enfatiza:</p>
-                <ul>
-                    <li>Harmonia social e ordem política</li>
-                    <li>Piedade filial e respeito aos ancestrais</li>
-                    <li>Retidão moral e virtude pessoal</li>
-                    <li>Educação e cultivo pessoal</li>
-                </ul>
-                
-                <h4>Taoísmo</h4>
-                <p>Associado a Lao Tsé (séc. VI a.C.), busca a harmonia com o Tao (Caminho):</p>
-                <ul>
-                    <li>Simplicidade natural e espontaneidade</li>
-                    <li>Não-ação (Wu Wei): agir em harmonia com a natureza</li>
-                    <li>Equilíbrio de forças opostas (Yin e Yang)</li>
-                    <li>Busca pela longevidade e imortalidade</li>
-                </ul>
-                
-                <h4>Budismo</h4>
-                <p>Introduzido na China por volta do século I d.C., adaptou-se à cultura local:</p>
-                <ul>
-                    <li>Conceitos de karma e reencarnação</li>
-                    <li>Busca pela iluminação e libertação do sofrimento</li>
-                    <li>Desenvolvimento de escolas próprias como o Chan (Zen)</li>
-                    <li>Integração com práticas locais</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Religião Popular e Culto aos Ancestrais</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>Além dos sistemas filosóficos, a religiosidade cotidiana incluía:</p>
-                <ul>
-                    <li><strong>Culto aos Ancestrais</strong>: Prática fundamental em que os descendentes honravam seus antepassados com oferendas e rituais.</li>
-                    <li><strong>Divindades Locais</strong>: Deuses e espíritos associados a montanhas, rios, cidades e profissões.</li>
-                    <li><strong>Conceito de Céu (Tian)</strong>: Entidade suprema que garantia o mandato divino ao imperador.</li>
-                    <li><strong>Práticas Divinatórias</strong>: Uso do I Ching, astrologia e outras formas de prever o futuro e buscar orientação.</li>
-                </ul>
-                <p>Essa amalgamação de crenças e práticas criou um sistema religioso sincrético e pragmático, em que diferentes tradições eram seguidas conforme a necessidade e ocasião.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="ciencia">
-        <h2>6. Ciências e Inovações</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>O Engenho Chinês</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A China antiga foi berço de numerosas invenções e descobertas científicas que transformaram não apenas sua própria civilização, mas eventualmente o mundo inteiro. Muitas dessas inovações surgiram séculos ou mesmo milênios antes de aparecerem no Ocidente.</p>
-            </div>
-        </div>
-
-        <div class="inventions-container">
-            <div class="invention">
-                <div class="invention-icon">
-                    <i class="fas fa-scroll"></i>
-                </div>
-                <h3>Papel</h3>
-                <p>Inventado por volta de 105 d.C. por Cai Lun, revolucionou a comunicação e preservação do conhecimento.</p>
-            </div>
-            
-            <div class="invention">
-                <div class="invention-icon">
-                    <i class="fas fa-print"></i>
-                </div>
-                <h3>Impressão</h3>
-                <p>A impressão com blocos de madeira surgiu na Dinastia Tang (618-907), e a impressão com tipos móveis foi inventada por Bi Sheng por volta de 1040.</p>
-            </div>
-            
-            <div class="invention">
-                <div class="invention-icon">
-                    <i class="fas fa-compass"></i>
-                </div>
-                <h3>Bússola</h3>
-                <p>Desenvolvida inicialmente para adivinhação durante a Dinastia Han, foi adaptada para navegação marítima na Dinastia Song.</p>
-            </div>
-            
-            <div class="invention">
-                <div class="invention-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <h3>Pólvora</h3>
-                <p>Descoberta por alquimistas chineses no século IX, foi usada primeiro em fogos de artifício e depois em armas.</p>
-            </div>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Avanços Científicos</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>Além das quatro grandes invenções acima, a China antiga fez avanços notáveis em diversos campos:</p>
-                <ul>
-                    <li><strong>Astronomia</strong>: Registros detalhados de fenômenos celestes, incluindo cometas e supernovas, datam de milhares de anos.</li>
-                    <li><strong>Matemática</strong>: Desenvolvimento do sistema decimal de posição, cálculo com números negativos e resolução de equações.</li>
-                    <li><strong>Medicina</strong>: Texto médico mais antigo, o Nei Jing (Clássico de Medicina Interna), data de cerca de 200 a.C. Desenvolveu conceitos como acupuntura, moxabustão e teoria dos meridianos.</li>
-                    <li><strong>Engenharia</strong>: Construção de pontes suspensas, canais de irrigação complexos e sistemas de controle de inundações.</li>
-                    <li><strong>Sismologia</strong>: Primeiro sismógrafo do mundo, inventado por Zhang Heng em 132 d.C.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="muralha">
-        <h2>7. Grande Muralha da China</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>A Maior Obra de Defesa do Mundo</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A Grande Muralha da China não é uma única estrutura construída em um único período, mas um sistema de fortificações construído, reconstruído e mantido do século V a.C. até o século XVI d.C.</p>
-                <p>Principais fatos sobre a Grande Muralha:</p>
-                <ul>
-                    <li>As primeiras seções foram construídas por estados independentes para proteção contra invasões nômades do norte.</li>
-                    <li>O Imperador Qin Shi Huang (221-206 a.C.) conectou várias seções existentes para formar uma barreira defensiva unificada.</li>
-                    <li>A maior parte da muralha que existe hoje foi construída durante a Dinastia Ming (1368-1644).</li>
-                    <li>Estima-se que se estende por mais de 21.000 km em sua totalidade.</li>
-                    <li>Além de defesa militar, a muralha servia para controle de fronteiras, regulação do comércio e cobrança de impostos.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="map2-container">
-            <div class="nones">
-            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                <!-- Contorno da China -->
-                <path class="china-map" d="M200,200 C250,150 300,100 400,150 C500,200 600,250 650,300 C700,350 600,400 500,400 C400,400 300,350 250,300 C200,250 150,250 200,200 Z" />
-                
-                <!-- Grande Muralha -->
-                <path class="great-wall" d="M150,150 C200,140 250,150 300,140 C350,130 400,120 450,130 C500,140 550,150 600,140" />
-            </svg>
-            </div>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Construção e Custo Humano</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A construção da Grande Muralha foi um empreendimento de imenso custo humano:</p>
-                <ul>
-                    <li>Milhões de trabalhadores, incluindo soldados, camponeses, prisioneiros e condenados, foram mobilizados para sua construção.</li>
-                    <li>Estima-se que centenas de milhares de pessoas morreram durante a construção, sendo muitas enterradas dentro ou perto da própria muralha.</li>
-                    <li>Os materiais de construção variavam conforme a região: pedra, tijolo, madeira, terra compactada e outros materiais locais.</li>
-                    <li>Em algumas regiões montanhosas, os construtores aproveitaram o terreno natural para complementar as defesas da muralha.</li>
-                </ul>
-                <p>Hoje, a Grande Muralha é um símbolo nacional da China e Patrimônio Mundial da UNESCO, atraindo milhões de visitantes anualmente.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="exercito">
-        <h2>8. Exército de Terracota</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>O Exército Eterno do Primeiro Imperador</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>O Exército de Terracota é uma coleção de esculturas em terracota representando os exércitos do primeiro Imperador da China, Qin Shi Huang. Foi enterrado com o imperador em 210-209 a.C. com o propósito de protegê-lo em sua vida após a morte.</p>
-                <p>Descoberto em 1974 por agricultores locais que cavavam um poço, o exército é parte de um complexo muito maior que constitui o mausoléu do imperador.</p>
-                <ul>
-                    <li>Estima-se que existam mais de 8.000 soldados, 130 carruagens com 520 cavalos e 150 cavalos de cavalaria.</li>
-                    <li>Cada soldado é único, com características faciais, uniformes e posições distintas.</li>
-                    <li>Originalmente, as figuras eram pintadas com cores vibrantes, mas a maioria da pintura se deteriorou com o tempo.</li>
-                    <li>Estão organizados em formações de batalha, de acordo com os táticas militares da época.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="terracotta-container">
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-            <div class="terracotta-soldier"></div>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Significado Histórico e Cultural</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>O Exército de Terracota revela muito sobre a China antiga:</p>
-                <ul>
-                    <li><strong>Tecnologia avançada</strong>: Demonstra sofisticadas técnicas de cerâmica e produção em massa.</li>
-                    <li><strong>Organização militar</strong>: Reflete a estrutura e equipamento do exército que unificou a China.</li>
-                    <li><strong>Crenças funerárias</strong>: Ilustra a visão da vida após a morte e a necessidade de proteção no além.</li>
-                    <li><strong>Poder imperial</strong>: Simboliza a autoridade e ambição do primeiro imperador, que desejava governar eternamente.</li>
-                </ul>
-                <p>Hoje, o Exército de Terracota é um dos maiores achados arqueológicos do século XX e Patrimônio Mundial da UNESCO, oferecendo insights valiosos sobre a história e cultura da China antiga.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="comercio">
-        <h2>9. Comércio e Rota da Seda</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>A Grande Via Comercial da Antiguidade</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A Rota da Seda não era uma única estrada, mas uma rede de rotas comerciais que conectavam o Leste da Ásia com o Sul da Ásia, Pérsia, Arábia, Somália, Egito, e eventualmente Europa.</p>
-                <p>Estabelecida durante a Dinastia Han (por volta de 130 a.C.), quando o imperador enviou o diplomata Zhang Qian em missões ao oeste, a Rota da Seda prosperou por séculos, atingindo seu auge durante a Dinastia Tang (618-907 d.C.).</p>
-            </div>
-        </div>
-
-        <div class="map3-container">
-            <div class="nones">
-            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                <!-- Contorno da China -->
-                <path class="china-map" d="M500,200 C550,150 600,150 650,200 C700,250 700,300 650,350 C600,400 550,400 500,350 C450,300 450,250 500,200 Z" />
-                
-                <!-- Rota da Seda -->
-                <path class="silk-road" d="M650,250 C550,200 450,200 350,220 C250,240 150,250 50,270" />
-                
-                <!-- Cidades -->
-                <circle cx="600" cy="220" r="5" fill="var(--primary-color)" />
-                <text x="605" y="220" fill="var(--primary-color)" font-size="12">Chang'an</text>
-                
-                <circle cx="500" cy="210" r="5" fill="var(--primary-color)" />
-                <text x="505" y="210" fill="var(--primary-color)" font-size="12">Dunhuang</text>
-                
-                <circle cx="350" cy="220" r="5" fill="var(--primary-color)" />
-                <text x="355" y="220" fill="var(--primary-color)" font-size="12">Kashgar</text>
-                
-                <circle cx="200" cy="245" r="5" fill="var(--primary-color)" />
-                <text x="205" y="245" fill="var(--primary-color)" font-size="12">Samarcanda</text>
-                
-                <circle cx="100" cy="260" r="5" fill="var(--primary-color)" />
-                <text x="105" y="260" fill="var(--primary-color)" font-size="12">Antioquia</text>
-            </svg>
-            </div>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Além da Seda: Intercâmbio Cultural</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>Embora o nome destaque a seda, que era o produto mais valioso exportado da China, a Rota da Seda facilitou o comércio de muitos outros bens:</p>
-                <ul>
-                    <li><strong>Da China para o Oeste</strong>: Seda, porcelana, jade, bronze, ferro, espelhos, verniz, papel.</li>
-                    <li><strong>Do Oeste para a China</strong>: Vidro, ouro, prata, pedras preciosas, marfim, perfumes, especiarias, cavalos.</li>
-                </ul>
-                <p>Mais importante ainda, a Rota da Seda promoveu um extenso intercâmbio cultural:</p>
-                <ul>
-                    <li><strong>Religiões</strong>: O Budismo chegou à China pela Rota da Seda, assim como o Cristianismo Nestoriano, o Zoroastrismo e, mais tarde, o Islã.</li>
-                    <li><strong>Ciência e tecnologia</strong>: Conhecimentos matemáticos, astronômicos e médicos foram compartilhados.</li>
-                    <li><strong>Artes</strong>: Estilos artísticos se misturaram, criando novas formas de expressão, especialmente visíveis na arte budista.</li>
-                    <li><strong>Idiomas</strong>: Diferentes línguas se influenciaram, e sistemas de escrita se espalharam.</li>
-                </ul>
-                <p>A Rota da Seda foi, portanto, muito mais que uma via comercial - foi um corredor de civilizações que moldou profundamente a história mundial.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="legado">
-        <h2>10. Legado da China Antiga</h2>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Uma Herança Que Transcende o Tempo</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>O legado da China antiga permeia praticamente todos os aspectos da civilização humana moderna. Invenções, ideias filosóficas, sistemas políticos e tradições culturais que surgiram na China antiga continuam a influenciar o mundo contemporâneo de maneiras profundas.</p>
-            </div>
-        </div>
-
-        <div class="legacy-items">
-            <div class="legacy-item">
-                <div class="legacy-icon"><i class="fas fa-balance-scale"></i></div>
-                <h3>Sistema Político</h3>
-                <p>O sistema de meritocracia e burocracia estatal</p>
-            </div>
-            
-            <div class="legacy-item">
-                <div class="legacy-icon"><i class="fas fa-book"></i></div>
-                <h3>Filosofia</h3>
-                <p>Confucionismo, Taoísmo e outras escolas filosóficas</p>
-            </div>
-            
-            <div class="legacy-item">
-                <div class="legacy-icon"><i class="fas fa-paint-brush"></i></div>
-                <h3>Artes</h3>
-                <p>Caligrafia, pintura, poesia e cerâmica</p>
-            </div>
-            
-            <div class="legacy-item">
-                <div class="legacy-icon"><i class="fas fa-flask"></i></div>
-                <h3>Ciência</h3>
-                <p>Medicina tradicional, astronomia e matemática</p>
-            </div>
-            
-            <div class="legacy-item">
-                <div class="legacy-icon"><i class="fas fa-utensils"></i></div>
-                <h3>Gastronomia</h3>
-                <p>Técnicas culinárias e alimentos diversos</p>
-            </div>
-            
-            <div class="legacy-item">
-                <div class="legacy-icon"><i class="fas fa-drafting-compass"></i></div>
-                <h3>Arquitetura</h3>
-                <p>Princípios estéticos e técnicas construtivas</p>
-            </div>
-        </div>
-        
-        <div class="scroll-container">
-            <div class="scroll-title">
-                <h3>Influência Global</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="scroll-content">
-                <p>A influência da China antiga se estendeu muito além de suas fronteiras:</p>
-                <ul>
-                    <li><strong>Leste Asiático</strong>: Países como Japão, Coreia e Vietnã adotaram elementos da cultura chinesa, incluindo a escrita, o Confucionismo e sistemas de governo.</li>
-                    <li><strong>Sistema Internacional</strong>: O modelo tributário chinês influenciou as relações internacionais na Ásia por séculos.</li>
-                    <li><strong>Comércio Global</strong>: A seda, porcelana e chá chineses moldaram os padrões de comércio mundial e até motivaram explorações europeias.</li>
-                    <li><strong>Tecnologia Moderna</strong>: Invenções chinesas como o papel, a impressão, a bússola e a pólvora foram fundamentais para o desenvolvimento da civilização global.</li>
-                </ul>
-                <p>Hoje, enquanto a China emerge como uma potência global no século XXI, muitos de seus valores e práticas contemporâneas têm raízes profundas em sua história antiga, demonstrando a notável continuidade de uma das civilizações mais duradouras do mundo.</p>
-            </div>
-        </div>
-    </section>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ativar a primeira seção
-            document.getElementById('intro').classList.add('active');
-            
-            // Configurar rolagem suave para links internos
-            document.querySelectorAll('.scroll-dot, .scroll-down').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('data-section');
-                    const targetElement = document.getElementById(targetId || 'geografia');
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop,
-                        behavior: 'smooth'
-                    });
-                });
-            });
+        // Elementos do DOM
+        const gameContainer = document.getElementById('game-container');
+        const playerEl = document.getElementById('player');
+        const enemyEl = document.getElementById('enemy');
+        const playerHealthFill = document.getElementById('player-health-fill');
+        const enemyHealthFill = document.getElementById('enemy-health-fill');
+        const playerHpText = document.getElementById('player-hp-text');
+        const enemyHpText = document.getElementById('enemy-hp-text');
+        const gameMessagesEl = document.getElementById('game-messages');
+        const finishingBlowScreen = document.getElementById('finishing-blow-screen');
+        const countdownTimerEl = document.getElementById('countdown-timer');
+        const gameOverScreen = document.getElementById('game-over-screen');
+        const restartBtn = document.getElementById('restart-btn');
+        const finalMessageEl = document.getElementById('final-message');
+        const finalStatsEl = document.getElementById('final-stats');
+        const bossPhaseEl = document.getElementById('boss-phase');
+        const bossPatternEl = document.getElementById('boss-pattern');
+        const dashIconEl = document.getElementById('dash-icon');
+        const shieldIconEl = document.getElementById('shield-icon');
+        const chargeIconEl = document.getElementById('charge-icon');
+        const hitsNeededEl = document.getElementById('hits-needed');
 
-            // Configurar interatividade dos pergaminhos
-            document.querySelectorAll('.scroll-title').forEach(title => {
-                title.addEventListener('click', function() {
-                    const container = this.parentElement;
-                    container.classList.toggle('open');
-                });
-            });
+        // Estado do jogo
+        let gameRunning = false;
+        let finishingBlowActive = false;
+        let finishingBlowTimer = 0;
+        let finishingBlowHits = 0;
+        let gameOver = false;
+        let gameStartTime = 0;
+        let totalDamageDealt = 0;
+        let totalDamageTaken = 0;
 
-            // Inicializar ScrollTrigger para animações baseadas em rolagem
-            gsap.registerPlugin(ScrollTrigger);
+        // Atributos do jogador
+        const player = {
+            x: 425,
+            y: 620,
+            width: 50,
+            height: 50,
+            hp: 300,
+            maxHp: 300,
+            speed: 6,
+            projectileDamage: 8,
+            projectileSpeed: 10,
+            shootCooldown: 150,
+            lastShotTime: 0,
+            // Novas habilidades
+            dashCooldown: 2000,
+            lastDashTime: 0,
+            dashDistance: 120,
+            dashDuration: 200,
+            isDashing: false,
+            shieldCooldown: 5000,
+            lastShieldTime: 0,
+            shieldDuration: 2000,
+            isShielded: false,
+            chargeShot: {
+                isCharging: false,
+                chargeTime: 0,
+                maxChargeTime: 1500,
+                cooldown: 3000,
+                lastChargeTime: 0
+            }
+        };
+
+        // Atributos do inimigo
+        const enemy = {
+            x: 410,
+            y: 180,
+            width: 80,
+            height: 80,
+            hp: 300,
+            maxHp: 300,
+            speed: 2,
+            direction: 1,
+            phase: 1,
+            attackPattern: 'basic',
+            lastAttackTime: 0,
+            lastMoveTime: 0,
+            specialAttackCooldown: 8000,
+            lastSpecialAttack: 0,
+            isCharging: false
+        };
+
+        // Arrays de projéteis
+        let playerProjectiles = [];
+        let enemyProjectiles = [];
+
+        // Controle de teclas
+        const keysPressed = {};
+
+        // IDs de intervalos/animações
+        let gameLoopId;
+        let enemyAIIntervalId;
+        let finishingBlowCountdownId;
+
+        // Configurações de ataque por fase
+        const phaseConfigs = {
+            1: {
+                hp: 300,
+                attackInterval: 1200,
+                moveInterval: 2000,
+                speed: 2,
+                projectileSpeed: 4,
+                pattern: 'basic',
+                attacks: ['bullet', 'knife']
+            },
+            2: {
+                hp: 200,
+                attackInterval: 800,
+                moveInterval: 1500,
+                speed: 3,
+                projectileSpeed: 5,
+                pattern: 'aggressive',
+                attacks: ['bullet', 'knife', 'spell', 'laser']
+            },
+            3: {
+                hp: 150,
+                attackInterval: 600,
+                moveInterval: 1000,
+                speed: 4,
+                projectileSpeed: 6,
+                pattern: 'chaos',
+                attacks: ['bullet', 'knife', 'spell', 'laser', 'homing']
+            }
+        };
+
+        // Configurações de projéteis
+        const projectileConfig = {
+            bullet: { damage: 15, speed: 4, className: 'enemy-bullet' },
+            knife: { damage: 20, speed: 5, className: 'enemy-knife' },
+            spell: { damage: 25, speed: 3, className: 'enemy-spell' },
+            laser: { damage: 30, speed: 8, className: 'enemy-laser' },
+            homing: { damage: 35, speed: 3, className: 'enemy-homing', isHoming: true }
+        };
+
+        // Inicialização do jogo
+        function initGame() {
+            gameStartTime = Date.now();
+            totalDamageDealt = 0;
+            totalDamageTaken = 0;
+
+            // Reset posições
+            player.x = 425;
+            player.y = 620;
+            enemy.x = 410;
+            enemy.y = 180;
+
+            // Reset vida e fase
+            player.hp = player.maxHp;
+            enemy.hp = phaseConfigs[1].hp;
+            enemy.maxHp = phaseConfigs[1].hp;
+            enemy.phase = 1;
+            enemy.direction = 1;
+
+            // Reset habilidades
+            player.isDashing = false;
+            player.isShielded = false;
+            player.chargeShot.isCharging = false;
+            player.chargeShot.chargeTime = 0;
+
+            // Limpar projéteis
+            clearProjectiles();
+            clearEffects();
+
+            // Reset estado
+            gameRunning = true;
+            finishingBlowActive = false;
+            gameOver = false;
+            finishingBlowTimer = 0;
+            finishingBlowHits = 0;
+
+            // Ocultar telas
+            finishingBlowScreen.style.display = 'none';
+            gameOverScreen.style.display = 'none';
+
+            // Atualizar posições visuais
+            updateCharacterPositions();
+            updateUI();
+            updateAbilityIcons();
+
+            // Limpar mensagens
+            showMessage('A batalha contra O Véu começou!', 'Fase 1: Despertar');
+
+            // Iniciar loops
+            startGameLoop();
+            startEnemyAI();
+        }
+
+        function clearProjectiles() {
+            const allProjectiles = document.querySelectorAll('.projectile');
+            allProjectiles.forEach(projectile => projectile.remove());
+            playerProjectiles = [];
+            enemyProjectiles = [];
+        }
+
+        function clearEffects() {
+            const allEffects = document.querySelectorAll('.shield-effect, .boss-phase-indicator');
+            allEffects.forEach(effect => effect.remove());
+        }
+
+        function updateCharacterPositions() {
+            playerEl.style.left = player.x + 'px';
+            playerEl.style.top = player.y + 'px';
+            enemyEl.style.left = enemy.x + 'px';
+            enemyEl.style.top = enemy.y + 'px';
+        }
+
+        function startGameLoop() {
+            gameLoopId = requestAnimationFrame(gameLoop);
+        }
+
+        function stopGameLoop() {
+            cancelAnimationFrame(gameLoopId);
+        }
+
+        function startEnemyAI() {
+            enemyAIIntervalId = setInterval(enemyAI, 100);
+        }
+
+        function stopEnemyAI() {
+            clearInterval(enemyAIIntervalId);
+        }
+
+        // Game Loop principal
+        function gameLoop(timestamp) {
+            if (gameOver) return;
+
+            handlePlayerMovement();
+            handlePlayerAbilities();
+            updateProjectiles();
+            checkCollisions();
+            updateUI();
+            updateAbilityIcons();
+            checkGameOver();
+
+            gameLoopId = requestAnimationFrame(gameLoop);
+        }
+
+        // Controle do jogador
+        function handlePlayerMovement() {
+            if (player.isDashing) return;
+
+            let newX = player.x;
+            if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A']) {
+                newX = Math.max(0, player.x - player.speed);
+            }
+            if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D']) {
+                newX = Math.min(gameContainer.offsetWidth - player.width, player.x + player.speed);
+            }
             
-            // Animação para os pergaminhos
-            gsap.utils.toArray('.scroll-container').forEach(scroll => {
-                ScrollTrigger.create({
-                    trigger: scroll,
-                    start: 'top 70%',
-                    onEnter: () => scroll.classList.add('animated')
-                });
-            });
+            player.x = newX;
+            playerEl.style.left = player.x + 'px';
+        }
+
+        function handlePlayerAbilities() {
+            const currentTime = Date.now();
+
+            // Dash
+            if (keysPressed['Shift'] && currentTime - player.lastDashTime > player.dashCooldown && !player.isDashing) {
+                performDash();
+            }
+
+            // Escudo
+            if (keysPressed['s'] || keysPressed['S']) {
+                if (currentTime - player.lastShieldTime > player.shieldCooldown && !player.isShielded) {
+                    activateShield();
+                }
+            }
+
+            // Tiro carregado
+            if (keysPressed['q'] || keysPressed['Q']) {
+                if (currentTime - player.chargeShot.lastChargeTime > player.chargeShot.cooldown && !player.chargeShot.isCharging) {
+                    startChargeShot();
+                }
+            } else if (player.chargeShot.isCharging) {
+                releaseChargeShot();
+            }
+
+            // Atualizar tiro carregado
+            if (player.chargeShot.isCharging) {
+                player.chargeShot.chargeTime = Math.min(player.chargeShot.maxChargeTime, 
+                    player.chargeShot.chargeTime + 16);
+            }
+        }
+
+        function performDash() {
+            player.isDashing = true;
+            player.lastDashTime = Date.now();
             
-            // Animação para a linha do tempo
-            ScrollTrigger.create({
-                trigger: '.timeline',
-                start: 'top 70%',
-                onEnter: () => document.querySelector('.timeline').classList.add('animated')
-            });
+            let dashDirection = 0;
+            if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A']) {
+                dashDirection = -1;
+            } else if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D']) {
+                dashDirection = 1;
+            } else {
+                dashDirection = Math.random() > 0.5 ? 1 : -1;
+            }
+
+            const targetX = Math.max(0, Math.min(gameContainer.offsetWidth - player.width, 
+                player.x + dashDirection * player.dashDistance));
             
-            // Animação para itens da linha do tempo com atraso
-            gsap.utils.toArray('.timeline-item').forEach((item, i) => {
-                ScrollTrigger.create({
-                    trigger: item,
-                    start: 'top 80%',
-                    onEnter: () => {
-                        setTimeout(() => {
-                            item.classList.add('animated');
-                        }, i * 300);
-                    }
-                });
-            });
+            const startX = player.x;
+            const startTime = Date.now();
             
-            // Animação para caracteres chineses
-            gsap.utils.toArray('.character').forEach((char, i) => {
-                ScrollTrigger.create({
-                    trigger: char,
-                    start: 'top 80%',
-                    onEnter: () => {
-                        setTimeout(() => {
-                            char.classList.add('animated');
-                        }, i * 100);
-                    }
-                });
-            });
-            
-            // Animação para a Grande Muralha
-            ScrollTrigger.create({
-                trigger: '.great-wall',
-                start: 'top 70%',
-                onEnter: () => document.querySelector('.great-wall').classList.add('animated')
-            });
-            
-            // Animação para a Rota da Seda
-            ScrollTrigger.create({
-                trigger: '.silk-road',
-                start: 'top 70%',
-                onEnter: () => document.querySelector('.silk-road').classList.add('animated')
-            });
-            
-            // Animação para o Exército de Terracota
-            gsap.utils.toArray('.terracotta-soldier').forEach((soldier, i) => {
-                ScrollTrigger.create({
-                    trigger: soldier,
-                    start: 'top 80%',
-                    onEnter: () => {
-                        setTimeout(() => {
-                            soldier.classList.add('animated');
-                        }, i * 200);
-                    }
-                });
-            });
-            
-            // Animação para invenções
-            gsap.utils.toArray('.invention').forEach((invention, i) => {
-                ScrollTrigger.create({
-                    trigger: invention,
-                    start: 'top 80%',
-                    onEnter: () => {
-                        setTimeout(() => {
-                            invention.classList.add('animated');
-                        }, i * 200);
-                    }
-                });
-            });
-            
-            // Animação para itens de legado
-            gsap.utils.toArray('.legacy-item').forEach((item, i) => {
-                ScrollTrigger.create({
-                    trigger: item,
-                    start: 'top 80%',
-                    onEnter: () => {
-                        setTimeout(() => {
-                            item.classList.add('animated');
-                        }, i * 150);
-                    }
-                });
-            });
-            
-            // Atualizar indicador de rolagem
-            window.addEventListener('scroll', function() {
-                let current = '';
-                const sections = document.querySelectorAll('section');
-                const scrollPosition = window.pageYOffset + 300;
+            function animateDash() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / player.dashDuration, 1);
                 
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
+                player.x = startX + (targetX - startX) * easeOutQuart(progress);
+                playerEl.style.left = player.x + 'px';
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animateDash);
+                } else {
+                    player.isDashing = false;
+                }
+            }
+            
+            animateDash();
+            showMessage('Dash executado!', '');
+        }
+
+        function easeOutQuart(t) {
+            return 1 - Math.pow(1 - t, 4);
+        }
+
+        function activateShield() {
+            player.isShielded = true;
+            player.lastShieldTime = Date.now();
+            playerEl.classList.add('shielded');
+            
+            // Criar efeito visual
+            const shieldEffect = document.createElement('div');
+            shieldEffect.className = 'shield-effect';
+            shieldEffect.style.left = (player.x - 15) + 'px';
+            shieldEffect.style.top = (player.y - 15) + 'px';
+            gameContainer.appendChild(shieldEffect);
+            
+            setTimeout(() => {
+                player.isShielded = false;
+                playerEl.classList.remove('shielded');
+                shieldEffect.remove();
+            }, player.shieldDuration);
+            
+            showMessage('Escudo ativado!', '2 segundos de proteção');
+        }
+
+        function startChargeShot() {
+            player.chargeShot.isCharging = true;
+            player.chargeShot.chargeTime = 0;
+            showMessage('Carregando tiro especial...', 'Solte Q para disparar');
+        }
+
+        function releaseChargeShot() {
+            if (!player.chargeShot.isCharging) return;
+            
+            player.chargeShot.isCharging = false;
+            player.chargeShot.lastChargeTime = Date.now();
+            
+            const chargePercent = player.chargeShot.chargeTime / player.chargeShot.maxChargeTime;
+            const damage = Math.floor(player.projectileDamage * (10 + chargePercent * 16));
+            
+            const projectile = {
+                x: player.x + player.width / 2 - 8,
+                y: player.y,
+                width: 16,
+                height: 20,
+                speed: player.projectileSpeed + 2,
+                damage: damage,
+                element: null,
+                isCharged: true
+            };
+
+            const projectileEl = document.createElement('div');
+            projectileEl.className = 'projectile player-charged-shot';
+            projectileEl.style.left = projectile.x + 'px';
+            projectileEl.style.top = projectile.y + 'px';
+            gameContainer.appendChild(projectileEl);
+
+            projectile.element = projectileEl;
+            playerProjectiles.push(projectile);
+            
+            showMessage(`Tiro carregado! ${damage} de dano`, '');
+        }
+
+        // Tiro normal do jogador
+        function playerShoot() {
+            const currentTime = Date.now();
+            if (currentTime - player.lastShotTime < player.shootCooldown) return;
+
+            const projectile = {
+                x: player.x + player.width / 2 - 4,
+                y: player.y,
+                width: 8,
+                height: 12,
+                speed: player.projectileSpeed,
+                damage: player.projectileDamage,
+                element: null,
+                isCharged: false
+            };
+
+            const projectileEl = document.createElement('div');
+            projectileEl.className = 'projectile player-projectile';
+            projectileEl.style.left = projectile.x + 'px';
+            projectileEl.style.top = projectile.y + 'px';
+            gameContainer.appendChild(projectileEl);
+
+            projectile.element = projectileEl;
+            playerProjectiles.push(projectile);
+            player.lastShotTime = currentTime;
+        }
+
+        // IA do inimigo
+        function enemyAI() {
+            if (!gameRunning || finishingBlowActive || gameOver) return;
+
+            const currentTime = Date.now();
+            const config = phaseConfigs[enemy.phase];
+
+            // Movimento
+            if (currentTime - enemy.lastMoveTime > config.moveInterval) {
+                moveEnemy();
+                enemy.lastMoveTime = currentTime;
+            }
+
+            // Ataques
+            if (currentTime - enemy.lastAttackTime > config.attackInterval) {
+                enemyAttack();
+                enemy.lastAttackTime = currentTime;
+            }
+
+            // Ataque especial
+            if (currentTime - enemy.lastSpecialAttack > enemy.specialAttackCooldown) {
+                enemySpecialAttack();
+                enemy.lastSpecialAttack = currentTime;
+            }
+        }
+
+        function moveEnemy() {
+            const config = phaseConfigs[enemy.phase];
+            
+            // Movimento horizontal
+            enemy.x += enemy.direction * config.speed * 15;
+            
+            // Verificar limites e mudar direção
+            if (enemy.x <= 0 || enemy.x >= gameContainer.offsetWidth - enemy.width) {
+                enemy.direction *= -1;
+                // Mover ligeiramente para baixo em fases avançadas
+                if (enemy.phase > 1 && enemy.y < 300) {
+                    enemy.y += 20;
+                }
+            }
+
+            // Movimento especial por fase
+            if (enemy.phase === 3) {
+                // Fase 3: movimento errático
+                if (Math.random() < 0.3) {
+                    enemy.y += (Math.random() - 0.5) * 30;
+                    enemy.y = Math.max(150, Math.min(350, enemy.y));
+                }
+            }
+
+            enemyEl.style.left = enemy.x + 'px';
+            enemyEl.style.top = enemy.y + 'px';
+        }
+
+        function enemyAttack() {
+            const config = phaseConfigs[enemy.phase];
+            const attacks = config.attacks;
+            const attackType = attacks[Math.floor(Math.random() * attacks.length)];
+            
+            // Múltiplos projéteis em fases avançadas
+            let projectileCount = 1;
+            if (enemy.phase === 2 && Math.random() < 0.4) projectileCount = 2;
+            if (enemy.phase === 3 && Math.random() < 0.6) projectileCount = 3;
+
+            for (let i = 0; i < projectileCount; i++) {
+                createEnemyProjectile(attackType, i, projectileCount);
+            }
+
+            const attackMessages = {
+                bullet: 'O Véu dispara projéteis sombrios!',
+                knife: 'O Véu lança lâminas cortantes!',
+                spell: 'O Véu conjura magia das trevas!',
+                laser: 'O Véu dispara raios de energia!',
+                homing: 'O Véu lança projéteis rastreadores!'
+            };
+            
+            if (projectileCount > 1) {
+                showMessage(attackMessages[attackType], `Salva de ${projectileCount} projéteis!`);
+            } else {
+                showMessage(attackMessages[attackType], '');
+            }
+        }
+
+        function createEnemyProjectile(attackType, index, total) {
+            const config = projectileConfig[attackType];
+            const phaseConfig = phaseConfigs[enemy.phase];
+            
+            // Calcular posição base
+            let startX = enemy.x + enemy.width / 2 - 8;
+            let startY = enemy.y + enemy.height;
+            
+            // Espalhar projéteis múltiplos
+            if (total > 1) {
+                const spread = 40;
+                const offset = (index - (total - 1) / 2) * spread / (total - 1);
+                startX += offset;
+            }
+
+            // Calcular direção (mirar no jogador para alguns tipos)
+            let targetX = player.x + player.width / 2;
+            let targetY = player.y + player.height / 2;
+            
+            let dx = targetX - startX;
+            let dy = targetY - startY;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Normalizar direção
+            if (distance > 0) {
+                dx /= distance;
+                dy /= distance;
+            } else {
+                dx = 0;
+                dy = 1;
+            }
+
+            const projectile = {
+                x: startX,
+                y: startY,
+                width: 16,
+                height: 16,
+                speed: config.speed + (phaseConfig.projectileSpeed - 4),
+                damage: config.damage,
+                element: null,
+                dx: dx,
+                dy: dy,
+                isHoming: config.isHoming || false,
+                type: attackType
+            };
+
+            const projectileEl = document.createElement('div');
+            projectileEl.className = `projectile ${config.className}`;
+            projectileEl.style.left = projectile.x + 'px';
+            projectileEl.style.top = projectile.y + 'px';
+            gameContainer.appendChild(projectileEl);
+
+            projectile.element = projectileEl;
+            enemyProjectiles.push(projectile);
+        }
+
+        function enemySpecialAttack() {
+            enemy.isCharging = true;
+            enemyEl.classList.add('charging');
+            
+            showMessage('O Véu está preparando um ataque devastador!', 'CUIDADO!');
+            
+            setTimeout(() => {
+                if (!gameOver && gameRunning) {
+                    // Ataque especial baseado na fase
+                    if (enemy.phase === 1) {
+                        circularAttack();
+                    } else if (enemy.phase === 2) {
+                        laserBarrage();
+                    } else {
+                        chaosStorm();
+                    }
+                }
+                
+                enemy.isCharging = false;
+                enemyEl.classList.remove('charging');
+            }, 2000);
+        }
+
+        function circularAttack() {
+            const projectileCount = 8;
+            for (let i = 0; i < projectileCount; i++) {
+                const angle = (i / projectileCount) * Math.PI * 2;
+                const dx = Math.cos(angle);
+                const dy = Math.sin(angle);
+                
+                setTimeout(() => {
+                    if (!gameOver && gameRunning) {
+                        createDirectionalProjectile('spell', dx, dy);
+                    }
+                }, i * 100);
+            }
+            showMessage('Ataque Circular das Trevas!', '');
+        }
+
+        function laserBarrage() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    if (!gameOver && gameRunning) {
+                        createEnemyProjectile('laser', 0, 1);
+                    }
+                }, i * 200);
+            }
+            showMessage('Barragem de Lasers!', '');
+        }
+
+        function chaosStorm() {
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    if (!gameOver && gameRunning) {
+                        const types = ['bullet', 'knife', 'spell', 'laser', 'homing'];
+                        const randomType = types[Math.floor(Math.random() * types.length)];
+                        createEnemyProjectile(randomType, 0, 1);
+                    }
+                }, i * 150);
+            }
+            showMessage('TEMPESTADE DO CAOS!', 'Sobreviva!');
+        }
+
+        function createDirectionalProjectile(type, dx, dy) {
+            const config = projectileConfig[type];
+            const projectile = {
+                x: enemy.x + enemy.width / 2 - 8,
+                y: enemy.y + enemy.height / 2 - 8,
+                width: 16,
+                height: 16,
+                speed: config.speed,
+                damage: config.damage,
+                element: null,
+                dx: dx,
+                dy: dy,
+                isHoming: false,
+                type: type
+            };
+
+            const projectileEl = document.createElement('div');
+            projectileEl.className = `projectile ${config.className}`;
+            projectileEl.style.left = projectile.x + 'px';
+            projectileEl.style.top = projectile.y + 'px';
+            gameContainer.appendChild(projectileEl);
+
+            projectile.element = projectileEl;
+            enemyProjectiles.push(projectile);
+        }
+
+        // Atualização de projéteis
+        function updateProjectiles() {
+            // Projéteis do jogador
+            for (let i = playerProjectiles.length - 1; i >= 0; i--) {
+                const projectile = playerProjectiles[i];
+                projectile.y -= projectile.speed;
+                
+                if (projectile.y < -20) {
+                    projectile.element.remove();
+                    playerProjectiles.splice(i, 1);
+                } else {
+                    projectile.element.style.top = projectile.y + 'px';
+                }
+            }
+
+            // Projéteis do inimigo
+            for (let i = enemyProjectiles.length - 1; i >= 0; i--) {
+                const projectile = enemyProjectiles[i];
+                
+                if (projectile.isHoming) {
+                    // Projéteis rastreadores
+                    const dx = (player.x + player.width / 2) - (projectile.x + projectile.width / 2);
+                    const dy = (player.y + player.height / 2) - (projectile.y + projectile.height / 2);
+                    const distance = Math.sqrt(dx * dx + dy * dy);
                     
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        current = section.getAttribute('id');
+                    if (distance > 0) {
+                        projectile.dx = dx / distance;
+                        projectile.dy = dy / distance;
                     }
-                });
+                }
                 
-                document.querySelectorAll('.scroll-dot').forEach(dot => {
-                    dot.classList.remove('active');
-                    if (dot.getAttribute('data-section') === current) {
-                        dot.classList.add('active');
+                projectile.x += projectile.dx * projectile.speed;
+                projectile.y += projectile.dy * projectile.speed;
+                
+                if (projectile.y > gameContainer.offsetHeight + 20 || 
+                    projectile.x < -20 || projectile.x > gameContainer.offsetWidth + 20) {
+                    projectile.element.remove();
+                    enemyProjectiles.splice(i, 1);
+                } else {
+                    projectile.element.style.left = projectile.x + 'px';
+                    projectile.element.style.top = projectile.y + 'px';
+                }
+            }
+        }
+
+        // Detecção de colisões
+        function checkCollisions() {
+            // Jogador vs Projéteis do inimigo
+            for (let i = enemyProjectiles.length - 1; i >= 0; i--) {
+                const projectile = enemyProjectiles[i];
+                if (isColliding(player, projectile)) {
+                    if (!player.isShielded) {
+                        const damage = projectile.damage;
+                        player.hp = Math.max(0, player.hp - damage);
+                        totalDamageTaken += damage;
+                        showMessage(`Você foi atingido! -${damage} HP`, 'Use suas habilidades!');
+                    } else {
+                        showMessage('Escudo absorveu o dano!', '');
                     }
-                });
-            });
+                    projectile.element.remove();
+                    enemyProjectiles.splice(i, 1);
+                }
+            }
+
+            // Inimigo vs Projéteis do jogador
+            for (let i = playerProjectiles.length - 1; i >= 0; i--) {
+                const projectile = playerProjectiles[i];
+                if (isColliding(enemy, projectile)) {
+                    const damage = projectile.damage;
+                    enemy.hp = Math.max(0, enemy.hp - damage);
+                    totalDamageDealt += damage;
+                    projectile.element.remove();
+                    playerProjectiles.splice(i, 1);
+                    
+                    if (projectile.isCharged) {
+                        showMessage(`CRÍTICO! O Véu sofreu ${damage} de dano!`, 'Tiro carregado devastador!');
+                    } else {
+                        showMessage(`O Véu foi atingido! -${damage} HP`, '');
+                    }
+                    
+                    // Verificar mudança de fase
+                    checkPhaseTransition();
+                }
+            }
+        }
+
+        function checkPhaseTransition() {
+            const currentConfig = phaseConfigs[enemy.phase];
+            const hpPercent = enemy.hp / enemy.maxHp;
+            
+            if (enemy.phase === 1 && hpPercent <= 0.6) {
+                transitionToPhase(2);
+            } else if (enemy.phase === 2 && hpPercent <= 0.3) {
+                transitionToPhase(3);
+            }
+        }
+
+        function transitionToPhase(newPhase) {
+            enemy.phase = newPhase;
+            const config = phaseConfigs[newPhase];
+            
+            // Recuperar um pouco de vida na transição
+            enemy.hp = Math.min(enemy.maxHp, enemy.hp + 50);
+            
+            // Limpar projéteis
+            clearProjectiles();
+            
+            // Mostrar indicador de fase
+            const phaseIndicator = document.createElement('div');
+            phaseIndicator.className = 'boss-phase-indicator';
+            phaseIndicator.textContent = `FASE ${newPhase}!`;
+            gameContainer.appendChild(phaseIndicator);
+            
+            setTimeout(() => phaseIndicator.remove(), 3000);
+            
+            // Mensagens por fase
+            const phaseMessages = {
+                2: ['FASE 2: A Ira Desperta!', 'O Véu se torna mais agressivo!'],
+                3: ['FASE 3: CAOS ABSOLUTO!', 'O poder completo do Véu foi liberado!']
+            };
+            
+            showMessage(phaseMessages[newPhase][0], phaseMessages[newPhase][1]);
+            
+            // Reiniciar cooldowns especiais
+            enemy.lastSpecialAttack = Date.now();
+        }
+
+        function isColliding(rect1, rect2) {
+            return rect1.x < rect2.x + rect2.width &&
+                   rect1.x + rect1.width > rect2.x &&
+                   rect1.y < rect2.y + rect2.height &&
+                   rect1.y + rect1.height > rect2.y;
+        }
+
+        // Atualização da interface
+        function updateUI() {
+            // Atualizar barras de vida
+            const playerHpPercent = (player.hp / player.maxHp) * 100;
+            const enemyHpPercent = (enemy.hp / enemy.maxHp) * 100;
+
+            playerHealthFill.style.width = playerHpPercent + '%';
+            enemyHealthFill.style.width = enemyHpPercent + '%';
+
+            // Atualizar texto de HP
+            playerHpText.textContent = `HP: ${player.hp}/${player.maxHp}`;
+            enemyHpText.textContent = `HP: ${enemy.hp}/${enemy.maxHp}`;
+
+            // Atualizar cores da barra de vida do jogador
+            playerHealthFill.className = 'health-bar-fill';
+            if (playerHpPercent <= 25) {
+                playerHealthFill.classList.add('critical');
+            } else if (playerHpPercent <= 50) {
+                playerHealthFill.classList.add('warning');
+            }
+
+            // Atualizar informações do boss
+            bossPhaseEl.textContent = enemy.phase;
+            const patterns = { basic: 'Básico', aggressive: 'Agressivo', chaos: 'Caótico' };
+            bossPatternEl.textContent = `Padrão: ${patterns[phaseConfigs[enemy.phase].pattern]}`;
+        }
+
+        function updateAbilityIcons() {
+            const currentTime = Date.now();
+            
+            // Dash
+            const dashReady = currentTime - player.lastDashTime > player.dashCooldown;
+            dashIconEl.className = `ability-icon ${dashReady ? 'ready' : 'cooldown'}`;
+            
+            // Shield
+            const shieldReady = currentTime - player.lastShieldTime > player.shieldCooldown && !player.isShielded;
+            shieldIconEl.className = `ability-icon ${shieldReady ? 'ready' : 'cooldown'}`;
+            
+            // Charge shot
+            const chargeReady = currentTime - player.chargeShot.lastChargeTime > player.chargeShot.cooldown;
+            chargeIconEl.className = `ability-icon ${chargeReady ? 'ready' : 'cooldown'}`;
+        }
+
+        // Verificação de fim de jogo
+        function checkGameOver() {
+            if (player.hp <= 0) {
+                gameOver = true;
+                const gameTime = Math.floor((Date.now() - gameStartTime) / 1000);
+                finalMessageEl.textContent = 'Você Foi Derrotado!';
+                finalStatsEl.textContent = `Tempo de jogo: ${gameTime}s | Fase alcançada: ${enemy.phase} | Dano causado: ${totalDamageDealt}`;
+                gameOverScreen.style.display = 'flex';
+                stopGameLoop();
+                stopEnemyAI();
+            } else if (enemy.hp <= 0 && !finishingBlowActive && !gameOver) {
+                startFinishingBlow();
+            }
+        }
+
+        // Golpe final
+        function startFinishingBlow() {
+            finishingBlowActive = true;
+            stopEnemyAI();
+            clearProjectiles();
+            
+            finishingBlowScreen.style.display = 'flex';
+            finishingBlowTimer = 15;
+            finishingBlowHits = 0;
+            hitsNeededEl.textContent = '10';
+            updateFinishingBlowTimer();
+            
+            finishingBlowCountdownId = setInterval(updateFinishingBlowTimer, 1000);
+        }
+
+        function updateFinishingBlowTimer() {
+            countdownTimerEl.textContent = `Tempo: ${finishingBlowTimer}s`;
+            finishingBlowTimer--;
+            
+            if (finishingBlowTimer < 0) {
+                clearInterval(finishingBlowCountdownId);
+                if (!gameOver) {
+                    loseGame('Tempo Esgotado para o Golpe Final!');
+                }
+            }
+        }
+
+        function winGame() {
+            gameOver = true;
+            clearInterval(finishingBlowCountdownId);
+            stopGameLoop();
+            finishingBlowScreen.style.display = 'none';
+            
+            const gameTime = Math.floor((Date.now() - gameStartTime) / 1000);
+            const efficiency = Math.floor((totalDamageDealt / Math.max(totalDamageTaken, 1)) * 100);
+            
+            finalMessageEl.textContent = 'VITÓRIA ÉPICA! O Véu foi derrotado!';
+            finalStatsEl.innerHTML = `
+                Tempo total: ${gameTime}s<br>
+                Dano causado: ${totalDamageDealt}<br>
+                Dano recebido: ${totalDamageTaken}<br>
+                Eficiência: ${efficiency}%
+            `;
+            gameOverScreen.style.display = 'flex';
+        }
+
+        function loseGame(message) {
+            gameOver = true;
+            clearInterval(finishingBlowCountdownId);
+            stopGameLoop();
+            finishingBlowScreen.style.display = 'none';
+            
+            const gameTime = Math.floor((Date.now() - gameStartTime) / 1000);
+            finalMessageEl.textContent = message;
+            finalStatsEl.textContent = `Tempo de jogo: ${gameTime}s | Fase alcançada: ${enemy.phase} | Dano causado: ${totalDamageDealt}`;
+            gameOverScreen.style.display = 'flex';
+        }
+
+        function showMessage(primary, secondary) {
+            gameMessagesEl.innerHTML = `
+                <div>${primary}</div>
+                ${secondary ? `<div style="font-size: 12px; color: #ccc;">${secondary}</div>` : ''}
+            `;
+            
+            setTimeout(() => {
+                if (!gameOver) {
+                    gameMessagesEl.innerHTML = `
+                        <div>Continue lutando!</div>
+                        <div style="font-size: 12px; color: #ccc;">Use suas habilidades estrategicamente</div>
+                    `;
+                }
+            }, 3000);
+        }
+
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            keysPressed[e.key] = true;
+            
+            if (e.key === ' ') {
+                e.preventDefault();
+                if (gameRunning && !finishingBlowActive && !gameOver && !player.chargeShot.isCharging) {
+                    playerShoot();
+                }
+            }
+            
+            if ((e.key === 'f' || e.key === 'F') && finishingBlowActive) {
+                finishingBlowHits++;
+                hitsNeededEl.textContent = Math.max(0, 10 - finishingBlowHits);
+                
+                if (finishingBlowHits >= 10) {
+                    winGame();
+                }
+            }
         });
+
+        document.addEventListener('keyup', (e) => {
+            keysPressed[e.key] = false;
+        });
+
+        restartBtn.addEventListener('click', initGame);
+
+        // Iniciar o jogo
+        initGame();
     </script>
 </body>
 </html>
